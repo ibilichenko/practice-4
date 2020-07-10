@@ -1,7 +1,7 @@
-import { getJSON } from "./task-1.js";
+import { getJSON } from './task-1.js';
 
 export default function getSequential(urls) {
-    // Change me!
+  // Change me!
 
-    return new Promise();
+  return new Promise();
 }

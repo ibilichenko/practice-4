@@ -1,6 +1,6 @@
 
 export default function renderDialog(el, dialogId) {
-    el.innerHTML = `
+  el.innerHTML = `
         <div class="modal fade" id="${dialogId}" tabindex="-1" role="dialog" aria-labelledby="${dialogId}Label" aria-hidden="true" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
