@@ -37,32 +37,81 @@ export default class Cart {
   }
 
   getTotalQuantity() {
-    // Change me!
-    return 0;
+    let totalQuantity = 0;
+    for (const item of this.items) {
+      totalQuantity += item.quantity;
+    }
+
+    return totalQuantity;
   }
 
   getTotalPrice() {
-    // Change me!
-    return 0;
+    let totalPrice = 0;
+    for (const item of this.items) {
+      totalPrice += item.price;
+    }
+
+    return totalPrice;
   }
 
   load() {
-    // Change me!
+    this._ajax(this.baseUrl)
+      .then((response) => {
+        this.items = response;
+        this.loading = false;
+        this._notify()
+      })
   }
 
   addItem(item) {
-    // Change me!
+    this.loading = true;
+    this._notify();
+    this._ajax(this.baseUrl, 'POST', item)
+      .then(
+        () => {
+          this.load()
+        })
+      .catch(() => {
+        alert('Wrong input data')
+        this.loading = false;
+        this._notify()
+      });
   }
 
   updateItem(itemId, item) {
-    // Change me!
+    this.loading = true;
+    this._notify();
+    this._ajax(`${this.baseUrl}${itemId}`, 'PUT', item)
+      .then(() => {
+        this.load();
+      })
+      .catch(() => {
+        alert('There is no item with given id')
+        this.loading = false;
+        this._notify()
+      })
   }
 
   removeItem(itemId) {
-    // Change me!
+    this.loading = true;
+    this._notify();
+    this._ajax(`${this.baseUrl}${itemId}`, 'DELETE')
+      .then(() => {
+        this.load()
+      })
+      .catch(() => {
+        alert('There are no items with given id')
+        this.loading = false;
+        this._notify()
+      })
   }
 
   removeAll() {
-    // Change me!
+    this.loading = true;
+    this._notify();
+    this._ajax(this.baseUrl, 'DELETE')
+      .then(() => {
+        this.load();
+      })
   }
 }
